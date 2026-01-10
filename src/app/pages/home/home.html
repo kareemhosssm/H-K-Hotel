@@ -13,10 +13,10 @@
     <section class="relative w-full h-[60vh] md:h-[80vh] overflow-hidden">
         <!-- Hero Image -->
         <img src="/images/1.png" alt="Hero Image" class="w-full h-full object-cover">
-    
+
         <!-- Overlay -->
         <div class="absolute inset-0 bg-black/40"></div>
-    
+
         <!-- Content -->
         <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 z-10">
             <h1 class="text-4xl md:text-5xl font-bold mb-3">Welcome to A&K Grand Hotel</h1>
@@ -28,41 +28,159 @@
         </div>
     </section>
 
+    <!-- Popular Rooms Section -->
     <section>
-    <h2 class="text-2xl md:text-3xl font-bold font-serif text-center mb-8 py-5">Popular Rooms </h2>
-
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 justify-items-center px-4 ">
-
-        @for (room of RoomsList ; track room.roomId) {
-        <div class="card border-2 border-[#C9A24D] rounded-md shadow overflow-hidden relative w-full">
-            <div class="card-img">
-                <img class="w-full h-[250px] object-cover" [src]="'http://localhost:5192' + room.images[0]" [alt]="" />
-            </div>
-            <div class="card-body px-2 py-2">
-                <h4 class="text-black text-xl font-serif font-bold pb-2 text-center">
-                    {{ room.type }} Room
-                </h4>
-                <hr class="py-2">
-                <h3 class="font-medium">{{ room.number }}</h3>
-                <div class="flex justify-between items-center">
-                    <span>{{ room.pricePerNight | currency : "GBP" }} </span>
-                    <div class="flex items-center">
-                        <i class="fas fa-star text-yellow-300"></i>
-                        <span class="text-gray-500">5</span>
-                    </div>
-                </div>
-            </div>
-
-            <button [routerLink]="['/details', room.roomId]" class="btn-main text-white py-2 px-10 border rounded">
-                View Details
-            </button>
-
+        <div class="flex items-center justify-center gap-4 mb-6">
+            <span class="w-80 h-[2px] bg-gray-400"></span>
+        
+            <h2 class="text-2xl md:text-3xl font-bold font-serif text-center py-5">Popular Rooms </h2>
+        
+            <span class="w-80 h-[2px] bg-gray-400"></span>
         </div>
 
-        }
 
-    </div>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 justify-items-center px-4 ">
+
+            @for (room of RoomsList.slice(0,4) ; track room.roomId) {
+            <div class="card border-2 border-[#C9A24D] rounded-md shadow overflow-hidden relative w-full">
+                <div class="card-img">
+                    <img class="w-full h-[250px] object-cover" [src]="'http://localhost:5192' + room.images[0]"
+                        [alt]="" />
+                </div>
+                <div class="card-body px-2 py-2">
+                    <h4 class="text-black text-xl font-serif font-bold pb-2 text-center">
+                        {{ room.type }} Room
+                    </h4>
+                    <hr class="py-2">
+                    <h3 class="font-medium">Num :{{ room.number }}</h3>
+                    <h3 class="font-medium">IsAvailable : {{ room.isAvailable }}</h3>
+                    <div class="flex justify-between items-center">
+                        <span>{{ room.pricePerNight | currency : "GBP" }}  /Night</span>
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-300"></i>
+                            <span class="text-gray-500">5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button [routerLink]="['/details', room.roomId]" class="btn-main text-white py-2 px-10 border rounded">
+                    View Details
+                </button>
+
+            </div>
+
+            }
+
+        </div>
     </section>
+
+    <!-- why choose us Section -->
+    <section
+     class="py-16 ">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center gap-4 mb-12">
+                <span class="w-80 h-[1px] bg-gray-400"></span>
+            
+                <h2 class="text-2xl md:text-3xl font-medium font-serif text-[#0B1F33]">
+                    Why Choose Us
+                </h2>
+            
+                <span class="w-80 h-[1px] bg-gray-400"></span>
+            </div>
+
+    
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card -->
+                <div class="p-6 rounded-xl shadow-md border hover:shadow-lg transition bg-[#FFF8E7]">
+                    <div
+                        class="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-full bg-[#C9A24D] text-white text-2xl">
+                        📍
+                    </div>
+                    <h3 class="text-lg font-semibold text-[#0B1F33] mb-2">
+                        Prime Location
+                    </h3>
+                    <p class="text-gray-600 text-sm">
+                        Located in the heart of the city with stunning views and easy access.
+                    </p>
+                </div>
+    
+                <div class="p-6 rounded-xl shadow-md border hover:shadow-lg transition bg-[#FFF8E7]">
+                    <div
+                        class="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-full bg-[#C9A24D] text-white text-2xl">
+                        ⭐
+                    </div>
+                    <h3 class="text-lg font-semibold text-[#0B1F33] mb-2">
+                        5-Star Service
+                    </h3>
+                    <p class="text-gray-600 text-sm">
+                        Experience world-class hospitality and premium services.
+                    </p>
+                </div>
+    
+                <div class="p-6 rounded-xl shadow-md border hover:shadow-lg transition bg-[#FFF8E7]">
+                    <div
+                        class="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-full bg-[#C9A24D] text-white text-2xl">
+                        <img src="/icons/wifi.svg" alt="Free Wi-Fi" class="h-8">
+                    </div>
+                    <h3 class="text-lg font-semibold text-[#0B1F33] mb-2">
+                        Free Wi-Fi
+                    </h3>
+                    <p class="text-gray-600 text-sm">
+                        Stay connected with high-speed internet throughout the hotel.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- guest reviews section -->
+     <section class="py-16 ">
+  <div class="max-w-7xl mx-auto px-4 text-center">
+    <div class="flex items-center justify-center gap-4 mb-12">
+        <span class="w-80 h-[1px] bg-gray-800"></span>
+    
+        <h2 class="text-3xl font-serif text-[#0B1F33] ">
+            Guest Reviews
+        </h2>
+    
+        <span class="w-80 h-[1px] bg-gray-400"></span>
+    </div>
+
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Review -->
+      <div class="bg-[#d9d7d2] p-6 rounded-xl shadow-md text-left">
+        <div class="flex items-center gap-4 mb-4">
+          <img src="/images/kareemMoh1.jpg"
+               class="w-14 h-14 rounded-full object-cover" />
+          <div>
+            <h4 class="font-semibold text-[#0B1F33]">Kareem Mohamed</h4>
+            <span class="text-sm text-gray-500">Deluxe Room</span>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Amazing experience! The room was clean, spacious, and the view was breathtaking.
+        </p>
+      </div>
+
+      <div class="bg-[#d9d7d2] p-6 rounded-xl shadow-md text-left">
+        <div class="flex items-center gap-4 mb-4">
+          <img src="/images/AhmedHam.jpeg"
+               class="w-14 h-14 rounded-full object-cover" />
+          <div>
+            <h4 class="font-semibold text-[#0B1F33]">Ahmed Hammad</h4>
+            <span class="text-sm text-gray-500">Family Suite</span>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Perfect location, friendly staff, and excellent service. Highly recommended!
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
 </body>
 

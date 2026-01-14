@@ -46,8 +46,9 @@ private readonly authService = inject(AuthService);
             setTimeout(() => {
                //1- save token in local storage
               localStorage.setItem('userToken', res.token);
-              
-              //navigate to home page
+              // 2- decode token to get user info
+              this.authService.saveUserData();
+               // 3- navigate to home page
               this.router.navigate(['/home']);
             }, 1000);
             

@@ -3,12 +3,16 @@
     All Rooms
   </h2>
 
-<input [(ngModel)]="text" type="search" placeholder="Search By Room Type..." class="form-control w-50 mx-auto my-2" />
+  <input
+    [(ngModel)]="text"
+    type="search"
+    placeholder="Search By Room Type..."
+    class="form-control w-50 mx-auto my-2"
+  />
 
   <div
     class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 justify-items-center p-4"
   >
-
     @for (room of RoomsList |search : text ; ; track room.roomId) {
     <div
       class="card border-2 border-[#C9A24D] rounded-md shadow overflow-hidden relative w-full"

@@ -32,6 +32,8 @@
     "@angular/ssr": "^20.1.5",
     "@fortawesome/fontawesome-free": "^7.1.0",
     "bootstrap": "^5.3.8",
+    "chart.js": "^4.5.1",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "express": "^5.1.0",
     "flowbite": "^3.1.2",
     "jwt-decode": "^4.0.0",

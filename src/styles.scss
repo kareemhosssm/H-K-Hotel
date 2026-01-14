@@ -42,7 +42,13 @@ body {
 body {
   font-family: var(--font-family) !important;
 }
-
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
 .nav-link {
   transition: unset !important;
 }

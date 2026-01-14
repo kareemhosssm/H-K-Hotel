@@ -45,87 +45,56 @@
     <div class="hidden flex-grow w-full md:flex md:w-auto" id="navbar-default">
       @if(isLogin()){
       <ul
-        class="capitalize flex flex-col p-2 md:p-0 mt-1 rounded-lg md:flex-row md:space-x-1 rtl:space-x-reverse md:mt-0"
+        class="capitalize flex flex-col md:flex-row md:space-x-6 mx-auto items-center py-2 md:py-0 mt-1 rounded-lg"
       >
         <li>
           <a
             routerLink="/home"
-            routerLinkActive="nav-active "
-            class="block py-2 px-2 text-white rounded-sm"
+            routerLinkActive="nav-active"
+            class="block py-2 px-4 text-white rounded-sm"
             >home</a
           >
         </li>
         <li>
           <a
             routerLink="/rooms"
-            routerLinkActive="nav-active "
-            class="block py-2 px-2 text-white rounded-sm"
+            routerLinkActive="nav-active"
+            class="block py-2 px-4 text-white rounded-sm"
             >Rooms</a
           >
         </li>
         <li>
           <a
             routerLink="/booking"
-            routerLinkActive="nav-active "
-            class="block py-2 px-2 text-white rounded-sm"
+            routerLinkActive="nav-active"
+            class="block py-2 px-4 text-white rounded-sm"
             >Booking</a
           >
         </li>
-
         <li>
           <a
             routerLink="/connectUs"
-            routerLinkActive="nav-active "
-            class="block py-2 px-2 text-white rounded-sm"
+            routerLinkActive="nav-active"
+            class="block py-2 px-4 text-white rounded-sm"
             >ConnectUs</a
           >
         </li>
         <li>
           <a
             routerLink="/about"
-            routerLinkActive="nav-active "
-            class="block py-2 px-2 text-white rounded-sm"
+            routerLinkActive="nav-active"
+            class="block py-2 px-4 text-white rounded-sm"
             >About</a
           >
         </li>
       </ul>
+
       }
 
       <ul
         class="items-center capitalize ms-auto flex flex-col p-2 md:p-0 mt-2 rounded-lg md:flex-row md:space-x-0 rtl:space-x-reverse md:mt-0"
       >
-        <li>
-          <a href="#" class="block p-1.5 text-white rounded-sm">
-            <i class="fab fa-facebook"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="block p-1.5 text-white rounded-sm">
-            <i class="fab fa-tiktok"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="block p-1.5 text-white rounded-sm">
-            <i class="fab fa-twitter"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="block p-1.5 text-white rounded-sm">
-            <i class="fab fa-youtube"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="block p-1.5 text-white rounded-sm">
-            <i class="fab fa-instagram"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="block p-1.5 text-white rounded-sm">
-            <i class="fab fa-linkedin"></i>
-          </a>
-        </li>
-
-        @if(!isLogin()){
+        @if(isGuest){
         <li>
           <a
             routerLink="/login"
@@ -142,22 +111,25 @@
             >register</a
           >
         </li>
-        }@else{
+        }@else{ 
+          @if(isAdmin){
         <li>
           <a
-            routerLink="/cart"
-            routerLinkActive="text-green-600"
-            class="block text-2xl py-1 px-2 text-white rounded-sm"
-            ><i class="fas fa-cart-shopping"></i
-          ></a>
+            routerLink="/admin"
+            routerLinkActive="nav-active "
+            role="button"
+            class="block py-1 px-2 text-white rounded-sm"
+            >Admin</a
+          >
         </li>
-
+        }
         <li>
           <a
             routerLink="/logOut"
             routerLinkActive="nav-active "
             role="button"
             class="block py-1 px-2 text-white rounded-sm"
+            (click)="authService.logOUt()"
             >logOut</a
           >
         </li>

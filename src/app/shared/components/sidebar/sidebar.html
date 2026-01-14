@@ -1,0 +1,26 @@
+<!-- Sidebar -->
+<button class="mobile-toggle" (click)="toggleSidebar()">☰</button>
+
+<div class="sidebar" [class.open]="isOpen">
+    <div class="logo">
+        Hotel Admin
+    </div>
+
+    <ul class="menu">
+        <li class="sidebar-item active">Dashboard</li>
+        <li class="sidebar-item">Bookings</li>
+        <li class="sidebar-item">Rooms</li>
+        <li class="sidebar-item">Users</li>
+        <li class="sidebar-item">Reviews</li>
+        <li class="sidebar-item">Settings</li>
+    </ul>
+
+    <div class="logout">
+        <button class="sidebar-item">Logout</button>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    
+</div>

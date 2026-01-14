@@ -1,4 +1,7 @@
 import { Routes } from '@angular/router';
+import { logedGuard } from './core/guards/loged-guard';
+import { authGuard } from './core/guards/auth-guard';
+import { adminGuard } from './core/guards/admin/admin-guard';
 
 export const routes: Routes = [
   {
@@ -7,12 +10,48 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
 
+  // Admin Layout
+{
+  path: 'admin',
+  loadComponent: () =>
+    import('./layouts/admin-layout/admin-layout')
+      .then(c => c.AdminLayout),
+  canActivate: [adminGuard],
+  title: 'Admin Dashboard',
+  children: [
+    {
+      path: 'Dashboard',
+      loadComponent: () =>
+        import('./pages/dashboard/dashboard')
+          .then(c => c.Dashboard),
+      title: 'Dashboard',
+    },
+    {
+      path: 'bookings',
+      loadComponent: () =>
+        import('./pages/admin-bookings/admin-bookings')
+          .then(c => c.AdminBookings),
+      title: 'AdminBookings',
+    },
+    {
+      path: 'rooms',
+      loadComponent: () =>
+        import('./pages/admin-rooms/admin-rooms')
+          .then(c => c.AdminRooms),
+      title: 'AdminRooms',
+    },
+  ],
+},
+
+  
+
   // Auth Layout
   {
     path: '',
     loadComponent: () =>
       import('./layouts/auth-layout/auth-layout')
         .then(c => c.AuthLayout),
+    canActivate: [logedGuard],
     children: [
       {
         path: 'login',
@@ -50,6 +89,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/booking/booking')
             .then(c => c.Booking),
+        canActivate:[authGuard],
         title: 'Booking',
       },
       {

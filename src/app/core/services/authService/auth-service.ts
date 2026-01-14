@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from "@angular/router";
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
+import {jwtDecode} from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class AuthService {
     private readonly router = inject(Router);
 
     
-
+   userData: any = null;
    
     sendRegisterForm(data: object):Observable<any>
      {
@@ -25,7 +26,21 @@ export class AuthService {
         return this.httpClient.post(`${environment.baseUrl}/api/Auth/login`, data); 
      }
 
-   
+   saveUserData(): void{
+      if ( localStorage.getItem('userToken') !== null) { 
+         this.userData = jwtDecode(localStorage.getItem('userToken')!);
+         const userRole = this.userData['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+         localStorage.setItem('userRole', userRole);
+         console.log('userData' , this.userData)
+      }
+   }
+
+   logOUt(): void {
+      localStorage.removeItem('userToken');
+      this.userData = null;
+      // navigate login
+      this.router.navigate(['/login']);
+   }
      
    }
 

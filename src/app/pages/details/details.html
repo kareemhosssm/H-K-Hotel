@@ -93,6 +93,8 @@
                         Check In
                     </label>
                     <input type="date"
+                    [(ngModel)]="checkInDate"
+                    [min]="minDate"
                         class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
 
@@ -102,24 +104,14 @@
                         Check Out
                     </label>
                     <input type="date"
+                    [(ngModel)]="checkOutDate"
+                    [min]="checkInDate || minDate"
                         class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
 
-                <!-- Guests -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-600 my-2">
-                        Guests
-                    </label>
-                    <select
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option>1 Guest</option>
-                        <option>2 Guests</option>
-                        <option>3 Guests</option>
-                        <option>4 Guests</option>
-                    </select>
-                </div>  
+                  
 
-                <button [routerLink]="'/booking'" class="w-full btn-main border-yellow-500 mt-4">
+                <button (click)="bookNow()" class="w-full btn-main border-yellow-500 mt-4">
                     Book Now
                 </button>
             </div>

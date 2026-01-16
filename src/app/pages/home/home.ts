@@ -3,6 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { RoomService } from '../../core/services/rooms/room-service';
 import { IRoom } from '../../shared/interfaces/iroom';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ export class Home implements OnInit {
   
 
   private readonly roomService = inject(RoomService);
+  private readonly toastrService = inject(ToastrService);
   private readonly router = inject(Router);
 
 

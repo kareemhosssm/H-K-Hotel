@@ -1,1 +1,76 @@
-<p>admin-bookings works!</p>
+<div class="bg-white mt-8 rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-50 flex justify-between items-center">
+        <h2 class="text-lg font-bold text-gray-800">All Bookings</h2>
+        <span class="text-xs text-gray-500">Total: {{ allbooking.length }} Bookings</span>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead class="bg-gray-50 text-gray-600 uppercase text-[11px] font-semibold tracking-wider">
+                <tr>
+                    <th class="text-left py-4 px-6">Guest Details</th>
+                    <th class="text-left py-4 px-6">Room Info</th>
+                    <th class="text-left py-4 px-6">Room Number</th>
+                    <th class="text-left py-4 px-6">Schedule</th>
+                    <th class="text-left py-4 px-6">Current Status</th>
+                    <th class="text-left py-4 px-6">Update Status</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                <tr *ngFor="let booking of pagedBookings" class="hover:bg-blue-50/30 transition-colors">
+                    <td class="py-4 px-6 font-medium text-gray-900">{{ booking.guestName }}</td>
+                    <td class="py-4 px-6 text-gray-600">
+                        <span class="bg-gray-100 px-2 py-1 rounded text-xs">{{ booking.room }}</span>
+                    </td>
+                    <td class="py-4 px-6 text-gray-600">
+                        <span class="bg-gray-100 px-2 py-1 rounded text-xs">{{ booking.roomNumber }}</span>
+                    </td>
+                    <td class="py-4 px-6 text-gray-500">
+                        <div class="flex flex-col">
+                            <span>In: {{ booking.checkIn | date:'dd MMM yyyy' }}</span>
+                            <span class="text-[10px] text-gray-400">Out: {{ booking.checkOut | date:'dd MMM yyyy'
+                                }}</span>
+                        </div>
+                    </td>
+                    <td class="py-4 px-6">
+                        <span [ngClass]="{
+                            'bg-green-100 text-green-700 ring-1 ring-green-200': booking.status === 'Confirmed',
+                            'bg-yellow-100 text-yellow-700 ring-1 ring-yellow-200': booking.status === 'Pending',
+                            'bg-red-100 text-red-700 ring-1 ring-red-200': booking.status === 'Cancelled'
+                        }" class="px-3 py-1 rounded-full text-[11px] font-bold inline-flex items-center">
+                            {{ booking.status }}
+                        </span>
+                    </td>
+                    <td class="py-4 px-6">
+                        <select #statusSelect (change)="updateBookingStatus(booking.bookingId, statusSelect.value)"
+                            [value]="booking.status"
+                            class="mx-auto block px-3 py-1.5 text-xs bg-white border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-400 outline-none cursor-pointer">
+                            <option value="Pending"> Pending</option>
+                            <option value="Confirmed"> Confirm</option>
+                            <option value="Cancelled"> Cancel</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Pagination -->
+        <div class="flex justify-center mt-4 gap-2">
+            <button (click)="prevPage()" [disabled]="currentPage === 1"
+                class="px-3 py-1 border rounded hover:bg-gray-100">
+                Prev
+            </button>
+
+            <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="goToPage(i + 1)" [ngClass]="{
+            'bg-blue-500 text-white': currentPage === (i + 1),
+            'bg-white text-gray-700': currentPage !== (i + 1)
+          }" class="px-3 py-1 border rounded hover:bg-gray-100">
+                {{ i + 1 }}
+            </button>
+
+            <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="px-3 py-1 border rounded hover:bg-gray-100">
+                Next
+            </button>
+            </div>
+            
+            </div>
+            </div>

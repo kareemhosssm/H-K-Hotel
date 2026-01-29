@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "connet",
+        "createdata",
         "Hammad",
         "Iget",
         "iroom",
@@ -8,6 +9,9 @@
         "klma",
         "loged",
         "singel",
-        "toastr"
+        "Swal",
+        "sweetalert",
+        "toastr",
+        "updatedata"
     ]
 }

@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { logedGuard } from './core/guards/loged-guard';
 import { authGuard } from './core/guards/auth-guard';
 import { adminGuard } from './core/guards/admin/admin-guard';
-
+import { UpdateRoomComponent } from './admin/update-room/update-room';
 export const routes: Routes = [
   {
     path: '',
@@ -47,6 +47,13 @@ export const routes: Routes = [
       title: 'AdminRooms',
     },
     {
+      path: 'add', 
+      loadComponent: () => import('./admin/add-room/add-room').then(c => c.AddRoom),
+      title: 'Add New Room',
+    },
+    { path: 'rooms/update/:id', component: UpdateRoomComponent }
+,
+    {
       path: 'users',
       loadComponent: () =>
         import('./pages/admin-users/admin-users')
@@ -77,13 +84,13 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./layouts/auth-layout/auth-layout')
         .then(c => c.AuthLayout),
-    canActivate: [logedGuard],
     children: [
       {
         path: 'login',
         loadComponent: () =>
           import('./pages/login/login')
             .then(c => c.Login),
+        canActivate: [logedGuard],
         title: 'Login',
       },
       {
@@ -91,7 +98,22 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/register/register')
             .then(c => c.Register),
+        canActivate: [logedGuard],
         title: 'Register',
+      },
+      {
+        path: 'forgot',
+        loadComponent: () =>
+          import('./shared/components/forgot-password/forgot-password')
+            .then((m) => m.ForgotPassword),
+        title: 'forgotPassword',
+      },
+      {
+        path: 'reset-password',
+        loadComponent: () =>
+          import('./shared/components/reset-password/reset-password')
+            .then((m) => m.ResetPassword),
+        title: 'resetPassword',
       },
     ],
   },
@@ -119,7 +141,7 @@ export const routes: Routes = [
         title: 'Booking',
       },
       {
-        path: 'payment',
+        path: 'payment/:bookingId',
         loadComponent: () =>
           import('./pages/payment/payment')
             .then(c => c.Payment),

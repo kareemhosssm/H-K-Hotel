@@ -1,18 +1,18 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import {
-  AbstractControl,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators,
+  Validators
 } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Router, RouterLink } from '@angular/router';
+import { Router , RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/authService/auth-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink, CommonModule],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -23,12 +23,13 @@ private readonly authService = inject(AuthService);
 
  isLoading: boolean = false;
  msgError: string = '';
- isSuccess :string = '';
+ isSuccess: string = '';
+ showPassword = false;
 
   loginForm: FormGroup = new FormGroup({
     
     Email: new FormControl('' , [Validators.email, Validators.required]),
-    Password: new FormControl('', [Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/), Validators.required]),
+    Password: new FormControl('', [Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$/), Validators.required]),
   });
 
   submitForm(): void {
@@ -68,5 +69,7 @@ private readonly authService = inject(AuthService);
     }
   }
 
-
+  togglePassword() {
+  this.showPassword = !this.showPassword;
+}
 }

@@ -37,17 +37,71 @@
     <!-- Password -->
     <div class="mb-1" *ngIf="RegisterForm.get('Password') as passwordControl">
       <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
-      <input type="password" id="password" formControlName="Password"
-        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
-
+    
+      <div class="relative">
+        <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="Password"
+          class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 pr-10"
+           />
+    
+        <button type="button" (click)="togglePassword()" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">
+          <i *ngIf="!showPassword" class="fas fa-eye"></i>
+          <i *ngIf="showPassword" class="fas fa-eye-slash"></i>
+        </button>
+      </div>
+    
       <div *ngIf="passwordControl.touched && passwordControl.errors"
-        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100">
+        class="flex p-4 mt-2 text-sm text-red-800 rounded-lg bg-red-100">
         <ul class="list-disc list-inside">
           <li *ngIf="passwordControl.errors['required']">Password is required</li>
           <li *ngIf="passwordControl.errors['pattern']">Password must contain uppercase, number & special char</li>
         </ul>
       </div>
     </div>
+
+
+    <!-- rePassword -->
+     <div class="mb-1" *ngIf="RegisterForm.get('rePassword') as rePasswordControl">
+  <label
+    for="rePassword"
+    class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
+    Confirm Password
+  </label>
+
+  <div class="relative">
+    <input
+      [type]="showRePassword ? 'text' : 'password'"
+      id="rePassword"
+      formControlName="rePassword"
+      class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      
+    />
+
+    <button
+      type="button"
+      (click)="toggleRePassword()"
+      class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">
+      <i *ngIf="!showRePassword" class="fas fa-eye"></i>
+      <i *ngIf="showRePassword" class="fas fa-eye-slash"></i>
+    </button>
+  </div>
+
+  <!-- Password mismatch -->
+  <div *ngIf="RegisterForm.getError('mismatch') && rePasswordControl.touched"
+       class="flex p-4 mt-2 text-sm text-red-800 rounded-lg bg-red-100" role="alert">
+    <ul class="list-disc list-inside">
+      <li>Password confirmation is incorrect</li>
+    </ul>
+  </div>
+
+  <!-- Required error -->
+  <div *ngIf="rePasswordControl.errors?.['required'] && rePasswordControl.touched"
+       class="flex p-4 mt-2 text-sm text-red-800 rounded-lg bg-red-100" role="alert">
+    <ul class="list-disc list-inside">
+      <li>rePassword is required</li>
+    </ul>
+  </div>
+</div>
+
 
     <!-- PhoneNumber -->
     <div class="mb-1" *ngIf="RegisterForm.get('PhoneNumber') as phoneControl">
@@ -65,11 +119,13 @@
     </div>
 
     <!-- Submit Button -->
-    <button type="submit" [disabled]="isLoading" class="btn-main">
-      SignUp
-      <span *ngIf="isLoading"><i class="fas fa-spin fa-spinner"></i></span>
-    </button>
-
+    <div class="d-flex align-items-center justify-content-end gap-4">
+      <a routerLink="/login" class="link-primary hover:underline">Have already an Email?</a>
+      <button type="submit" [disabled]="isLoading" class="btn-main">
+        SignUp
+        <span *ngIf="isLoading"><i class="fas fa-spin fa-spinner"></i></span>
+      </button>
+    </div>
     <!-- Error / Success messages -->
     <p *ngIf="msgError" class="bg-red-400 text-white py-2 px-2 border">{{msgError}}</p>
     <p *ngIf="isSuccess" class="bg-green-400 text-white py-2 px-2 border">{{isSuccess}}</p>

@@ -8,6 +8,7 @@ import { routes } from './app.routes';
 import { errorsInterceptor } from './core/interceptors/errors/errors-interceptor';
 import { headersInterceptor } from './core/interceptors/headers/headers-interceptor';
 import { provideToastr } from 'ngx-toastr';
+import { provideSweetAlert2 } from "@sweetalert2/ngx-sweetalert2";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch() , withInterceptors([headersInterceptor , errorsInterceptor])),
     provideAnimations(),
-    provideToastr()
+    provideToastr(),
+    provideSweetAlert2({
+            // Optional configuration
+            fireOnInit: false,
+            dismissOnDestroy: true,
+        }),
   ]
 };

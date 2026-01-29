@@ -5,6 +5,11 @@ import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 import {jwtDecode} from 'jwt-decode';
 
+export interface resetPass{
+   email: string;
+   token: string;
+   newPassword: string
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -16,15 +21,15 @@ export class AuthService {
     
    userData: any = null;
    
-    sendRegisterForm(data: object):Observable<any>
-     {
-        return this.httpClient.post(`${environment.baseUrl}/api/Auth/register`, data); 
-     }
+   sendRegisterForm(data: object):Observable<any>
+   {
+      return this.httpClient.post(`${environment.baseUrl}/api/Auth/register`, data, { responseType: 'text' }); 
+   }
 
-     sendLoginForm(data: object):Observable<any>
+   sendLoginForm(data: object):Observable<any>
      {
         return this.httpClient.post(`${environment.baseUrl}/api/Auth/login`, data); 
-     }
+   }
 
    saveUserData(): void{
       if ( localStorage.getItem('userToken') !== null) { 
@@ -49,6 +54,16 @@ export class AuthService {
       // navigate login
       this.router.navigate(['/login']);
    }
-     
+   
+   forgotPassword(data: { email: string }): Observable<any>
+   {
+      return this.httpClient.post(`${environment.baseUrl}/api/Auth/forgot-password`, data, { responseType: 'text' });
+   }
+
+
+   resetPassword(data: resetPass): Observable<any>
+   {
+     return this.httpClient.post(`${environment.baseUrl}/api/Auth/reset-password`, data,  { responseType: 'text' });
+   }
    }
 

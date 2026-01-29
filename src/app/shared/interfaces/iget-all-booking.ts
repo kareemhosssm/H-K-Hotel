@@ -1,4 +1,3 @@
-
 export interface IgetAllBooking {
     bookingId:    number;
     userId:       string;
@@ -6,6 +5,9 @@ export interface IgetAllBooking {
     room:         Room;
     checkInDate:  Date;
     checkOutDate: Date;
+    createdAt:    Date;
+    expiresAt:    Date;
+    status:       string;
 }
 
 export interface Room {

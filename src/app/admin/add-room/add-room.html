@@ -1,0 +1,99 @@
+<form 
+  [formGroup]="roomForm" 
+  (ngSubmit)="onSubmit()" 
+  class="container mt-4"
+>
+  <div class="card shadow-sm border-0">
+    
+    <!-- Header -->
+    <div class="card-header bg-white border-0">
+      <h5 class="mb-0 fw-bold text-primary">
+        <i class="bi bi-door-open me-2"></i>
+        Add New Room
+      </h5>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body">
+      
+      <!-- Room Number & Type -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Room Number</label>
+          <input 
+            type="text" 
+            class="form-control"
+            placeholder="e.g. 101"
+            formControlName="number"
+          >
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Room Type</label>
+          <input 
+            type="text" 
+            class="form-control"
+            placeholder="Single / Double / Family"
+            formControlName="type"
+          >
+        </div>
+      </div>
+
+      <!-- Price -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Price Per Night</label>
+        <input 
+          type="number" 
+          class="form-control"
+          placeholder="Enter price"
+          formControlName="pricePerNight"
+        >
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Description</label>
+        <textarea 
+          rows="4"
+          class="form-control"
+          placeholder="Room description..."
+          formControlName="description"
+        ></textarea>
+      </div>
+
+      <!-- Available -->
+      <div class="form-check form-switch mb-4">
+        <input 
+          class="form-check-input" 
+          type="checkbox"
+          formControlName="isAvailable"
+        >
+        <label class="form-check-label fw-semibold">
+          Available
+        </label>
+      </div>
+
+      <!-- Images -->
+      <div class="mb-4">
+        <label class="form-label fw-semibold">Room Images</label>
+        <input 
+          type="file" 
+          class="form-control"
+          (change)="onFileSelected($event)"
+          multiple
+        >
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-end gap-2">
+        <button type="reset" class="btn btn-outline-secondary">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary px-4">
+          Add Room
+        </button>
+      </div>
+
+    </div>
+  </div>
+</form>

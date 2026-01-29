@@ -106,10 +106,38 @@
     </section>
 
     <!-- CTA Footer Section -->
-    <section class="bg-[#0F2A44] text-white py-16 text-center">
-        <h2 class="text-3xl font-bold mb-6">Ready to experience comfort?</h2>
-        <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-8 rounded-md transition">Book
-            Your Stay</button>
+    <section class="reviews-section">
+    
+        <!-- Average Rating -->
+        <div class="average-rating" *ngFor="let review of reviews">
+            <h2>⭐ Average Rating: {{ averageRating }} / 5</h2>
+            <div class="stars">
+                <i class="fa fa-star" *ngFor="let s of getStars(review.rating)"></i>
+            </div>
+            <span>{{ reviews.length }} Reviews</span>
+        </div>
+    
+        Add Review
+        <!-- <div class="add-review" >
+            <textarea [(ngModel)]="newReview.comment" placeholder="Write your review..."></textarea>
+            <select [(ngModel)]="newReview.rating">
+                <option *ngFor="let r of [5,4,3,2,1]" [value]="r">{{ r }} ⭐</option>
+            </select>
+            <button (click)="addReview()">Submit Review</button>
+        </div> -->
+    
+        <!-- Reviews List -->
+        <!-- <div class="review-card" *ngFor="let review of reviews">
+            <div class="header">
+                <h4>{{ review.userName || 'User' }}</h4>
+                <div class="stars">
+                    <i class="fa fa-star" *ngFor="let s of [].constructor(review.rating)"></i>
+                </div>
+            </div>
+            <p>{{ review.comment }}</p>
+            <button (click)="deleteReview(review.id)">Delete</button>
+        </div> -->
     </section>
+
 
 </div>

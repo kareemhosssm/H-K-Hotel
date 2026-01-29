@@ -1,10 +1,19 @@
 <section>
     <div class="container mx-auto p-8 bg-[#F9F5F2] min-h-screen">
-        <div class="mb-8">
+        <div class="mb-8 flex justify-between items-center">
+           <div>
             <h1 class="text-3xl font-bold text-slate-800">My Bookings</h1>
             <p class="text-slate-500 mt-2">Review your current bookings, dates, and total cost.</p>
             <hr class="mt-4 border-slate-200">
+           </div> 
+
+        <button class="bg-gray-600 hover:bg-red-600 px-6 py-2 rounded-md text-white font-medium flex items-center gap-1 transition-colors" (click)="deleteAllBookings()">
+            <i class="fas fa-trash-can"></i>
+            <span>Remove All Booking</span>
+        </button>
         </div>
+
+        
     
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     
@@ -16,7 +25,7 @@
 
                     <div class="flex justify-between items-center gap-3">
                         <button class="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1"
-                            (click)="updateBooking(booking.bookingId)">
+                            (click)="startUpdate(booking)">
                             <i class="fas fa-pen"></i>
                             <span>Update</span>
                         </button>
@@ -44,6 +53,12 @@
                             <span class="text-slate-500">Check-Out:</span>
                             <span class="font-semibold text-slate-700">{{ booking.checkOutDate | date:'mediumDate' }}</span>
                         </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">status:</span>
+                            <span class="inline-block" [ngClass]="getStatusClass(booking.status)">
+                                {{ booking.status }}
+                            </span>
+                        </div>
                         <div class="flex justify-between border-t pt-2">
                             <span class="text-slate-500">Price/Night:</span>
                             <span class="font-semibold text-slate-700">{{ booking.room.pricePerNight | currency : "USD" }}</span>
@@ -56,8 +71,8 @@
                                     {{ getTotalPrice(booking.checkInDate, booking.checkOutDate, booking.room.pricePerNight) | currency : "USD" }}
                                 </span> 
                             </div>
-                            <button (click)="onPay(booking.roomId)"
-                                class="bg-[#1e4eb8] hover:bg-blue-800 text-white px-6 py-2 rounded-md font-medium transition-colors">
+                            <button (click)="onPay(booking.bookingId)"
+                                class="bg-[#C9A24D] hover:bg-yellow-700 text-white px-6 py-2 rounded-md font-medium transition-colors">
                                 Pay Now
                             </button>
                         </div>

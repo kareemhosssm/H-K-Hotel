@@ -29,12 +29,25 @@
             }
         </div>
 
-        <div class="mb-1">
-            @let passwordControl = loginForm.get('Password');
-            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Password</label>
-            <input formControlName="Password" type="password" id="password" class="form-control" />
-            @if (passwordControl?.touched && passwordControl?.errors) {
-            <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100" role="alert">
+        <div class="mb-1" *ngIf="loginForm.get('Password') as passwordControl">
+            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
+                Password
+            </label>
+        
+            <div class="relative">
+                <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="Password"
+                    class="form-control pr-10" />
+        
+                <button type="button" (click)="togglePassword()"
+                    class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">
+                    <i *ngIf="!showPassword" class="fas fa-eye"></i>
+                    <i *ngIf="showPassword" class="fas fa-eye-slash"></i>
+                </button>
+            </div>
+        
+            <!-- Error Messages -->
+            <div *ngIf="passwordControl.touched && passwordControl.errors"
+                class="flex p-4 mt-2 text-sm text-red-800 rounded-lg bg-red-100" role="alert">
                 <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor" viewBox="0 0 20 20">
                     <path
@@ -43,20 +56,20 @@
                 <span class="sr-only">Danger</span>
                 <div>
                     <ul class="mt-1.5 list-disc list-inside">
-                        @if (passwordControl?.errors?.['required']) {
-                        <li>Password is required</li>
-                        } @else if (passwordControl?.errors?.['pattern']) {
-                        <li>Enter valid Password</li>
-                        }
+                        <li *ngIf="passwordControl.errors['required']">Password is required</li>
+                        <li *ngIf="passwordControl.errors['pattern']">Enter valid Password</li>
                     </ul>
                 </div>
             </div>
-            }
         </div>
 
 
+
         <div class="d-flex align-items-center justify-content-end gap-4">
-            <!-- <a routerLink="/forgot" class="link-primary">ForgotPassword</a> -->
+            <a routerLink="/forgot" class="text-sm text-blue-600 hover:underline">
+                Forgot Password?
+            </a>
+
 
             <button [disabled]="isLoading" type="submit" class="btn-main">Login
 

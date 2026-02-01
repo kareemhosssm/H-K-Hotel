@@ -83,10 +83,10 @@ export class Details implements OnInit {
     this.bookingService.getBookingsByRoomId(roomId).subscribe(
       (res: IBookingRange[]) => {
         this.bookedRanges = res
-          .filter((b) => b.status.toLowerCase() !== 'cancelled')
+          .filter((b) => b.status?.toLowerCase() !== 'cancelled')
           .map((b) => ({
-            checkInDate: b.checkInDate.split('T')[0],
-            checkOutDate: b.checkOutDate.split('T')[0],
+            checkInDate: b.checkInDate?.split('T')[0],
+            checkOutDate: b.checkOutDate?.split('T')[0],
             status: b.status,
             roomId: b.roomId,
             bookingId: b.bookingId
@@ -103,7 +103,7 @@ export class Details implements OnInit {
     const end = new Date(endStr);
 
     return this.bookedRanges.some(b => {
-      if (b.bookingId === this.currentBookingId) return false; // نتجاهل الحجز الحالي عند التعديل
+      if (b.bookingId === this.currentBookingId) return false; 
       const bStart = new Date(b.checkInDate);
       const bEnd = new Date(b.checkOutDate);
       return start < bEnd && end > bStart;
@@ -111,58 +111,61 @@ export class Details implements OnInit {
   }
 
  bookOrUpdate(): void {
-    if (!this.checkInDate || !this.checkOutDate) {
-      this.toastrService.error('Please select check-in and check-out dates', 'Error');
-      return;
-    }
+  if (!this.checkInDate || !this.checkOutDate) {
+    this.toastrService.error('Please select check-in and check-out dates', 'Error');
+    return;
+  }
 
-    if (this.checkOutDate <= this.checkInDate) {
-      this.toastrService.error('Check-out must be after check-in', 'Error');
-      return;
-    }
+  if (this.checkOutDate <= this.checkInDate) {
+    this.toastrService.error('Check-out must be after check-in', 'Error');
+    return;
+   }
+   
+   if (this.hasDateConflict(this.checkInDate, this.checkOutDate)) {
+    this.toastrService.error('Selected dates are already booked', 'Error');
+    return; 
+  }
 
-    if (this.hasDateConflict(this.checkInDate, this.checkOutDate)) {
-      this.toastrService.error('Selected dates are already booked', 'Error');
-      return;
-    }
 
-    const updatedata : IUpdateBooking = {
-    checkInDate: new Date(this.checkInDate),  
+  const updatedata: IUpdateBooking = {
+    checkInDate: new Date(this.checkInDate),
     checkOutDate: new Date(this.checkOutDate),
     roomId: this.roomId
-   };
+  };
 
-   const createdata : IBookingRequest = {
-     roomId: this.roomId,
-    checkInDate: this.checkInDate,  
+  const createdata: IBookingRequest = {
+    roomId: this.roomId,
+    checkInDate: this.checkInDate,
     checkOutDate: this.checkOutDate
-   };
-   
+  };
 
-    if (this.currentBookingId) {
-      this.bookingService.updateBookingsByBookingId(this.currentBookingId, updatedata).subscribe({
-        next: () => {
+ const handleError = (err: any) => {
+    if (err.status === 409) {
+      this.toastrService.error('Selected dates are already booked', 'Error');
+    } else {
+      this.toastrService.error('Something went wrong. Try again later.', 'Error');
+    }
+  };
+    
+  if (this.currentBookingId) {
+    this.bookingService.updateBookingsByBookingId(this.currentBookingId, updatedata)
+      .subscribe({ next: () => {
           this.toastrService.success('Booking Updated Successfully', 'Success');
           this.router.navigate(['/booking']);
         },
-        error: (err) => {
-          this.toastrService.error(err.error || 'Update failed', 'Error');
-          console.error(err);
-        }
+        error: handleError
       });
-    } else {
-      this.bookingService.CreateBookingForUser(createdata).subscribe({
-        next: () => {
+  } else {
+    this.bookingService.CreateBookingForUser(createdata)
+      .subscribe({ next: () => {
           this.toastrService.success('Booking successful', 'Success');
           this.router.navigate(['/booking']);
         },
-        error: (err) => {
-          this.toastrService.error(err.error || 'Booking failed', 'Error');
-          console.error(err);
-        }
+        error: handleError
       });
-    }
   }
+}
+
 
 
   

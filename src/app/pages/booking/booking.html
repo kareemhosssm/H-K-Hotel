@@ -71,7 +71,7 @@
                                     {{ getTotalPrice(booking.checkInDate, booking.checkOutDate, booking.room.pricePerNight) | currency : "USD" }}
                                 </span> 
                             </div>
-                            <button (click)="onPay(booking.bookingId)"
+                            <button (click)="onPay(booking)"
                                 class="bg-[#C9A24D] hover:bg-yellow-700 text-white px-6 py-2 rounded-md font-medium transition-colors">
                                 Pay Now
                             </button>

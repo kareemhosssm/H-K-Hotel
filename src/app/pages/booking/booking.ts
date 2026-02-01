@@ -52,9 +52,12 @@ export class Booking implements OnInit {
     });
   }
 
-  onPay(bookingId: number | string): void {
-    console.log(bookingId);
-    this.router.navigate(['/payment' , bookingId]);
+  onPay(booking: IgetAllBooking): void {
+  const totalPrice = this.getTotalPrice(
+    booking.checkInDate,
+    booking.checkOutDate,
+    booking.room.pricePerNight
+  );
 
   }
 

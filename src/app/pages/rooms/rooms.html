@@ -15,35 +15,52 @@
   >
     @for (room of RoomsList |search : text ; ; track room.roomId) {
     <div
-      class="card border-2 border-[#C9A24D] rounded-md shadow overflow-hidden relative w-full"
-    >
-      <div class="card-img">
-        <img
-          class="w-full h-[250px] object-cover"
-          [src]="'http://localhost:5192' + room.images[0]"
-          [alt]=""
-        />
-      </div>
-      <div class="card-body px-2 py-2">
-        <h4 class="text-black text-xl font-serif font-bold pb-2 text-center">
-          {{ room.type }} Room
-        </h4>
-        <hr class="py-2" />
-        <h3 class="font-medium">Num :{{ room.number }}</h3>
-        <h3 class="font-medium">IsAvailable : {{ room.isAvailable }}</h3>
-        <div class="flex justify-between items-center">
-          <span>{{ room.pricePerNight | currency : "USD" }} /Night </span>
+      class="group bg-white rounded-3xl border border-gray-100 hover:border-[#C9A24D]/30 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden w-full flex flex-col">
+    
+      <div class="relative h-[230px] overflow-hidden">
+        <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          [src]="'http://localhost:5192' + room.images[0]" [alt]="room.type" />
+    
+        <div class="absolute top-4 left-4">
+          <span [class]="room.isAvailable ? 'bg-emerald-500/80' : 'bg-red-500/80'"
+            class="backdrop-blur-md text-white text-[10px] font-medium px-3 py-1 rounded-full uppercase tracking-wider">
+            {{ room.isAvailable ? 'Available' : 'Booked' }}
+          </span>
         </div>
       </div>
-
-      <button
-        [routerLink]="['/details', room.roomId]"
-        class="btn-main text-white py-2 px-10 border rounded"
-      >
-        View Details
-      </button>
+    
+      <div class="p-6 flex flex-col flex-grow">
+        <h4 class="text-gray-700 text-xl font-serif font-semibold mb-1 group-hover:text-[#C9A24D] transition-colors">
+          {{ room.type }} Room
+        </h4>
+    
+        <div class="flex justify-between items-center py-4 border-y border-gray-50 mb-6">
+          <div class="inline-flex items-center bg-[#C9A24D]/5 px-3 py-1.5 rounded-lg border border-[#C9A24D]/10 shadow-sm">
+            <span class="text-[10px] text-[#C9A24D] font-bold uppercase tracking-widest mr-1.5">Room</span>
+            <span class="text-sm font-black text-[#C9A24D] tracking-tighter">#{{ room.number }}</span>
+          </div>
+    
+          <div class="text-right">
+            <div class="flex items-baseline gap-1">
+              <span class="text-[#C9A24D] font-bold text-2xl">
+                {{ room.pricePerNight | currency : "USD" : "symbol" : '1.0-0' }}
+              </span>
+              <span class="text-gray-400 text-[11px]">/ night</span>
+            </div>
+          </div>
+        </div>
+    
+        <button [routerLink]="['/details', room.roomId]"
+          class="w-full bg-[#C9A24D]/10 hover:bg-[#C9A24D] text-[#C9A24D] hover:text-white py-3 rounded-2xl text-[12px] font-semibold transition-all duration-300 flex justify-center items-center gap-2 group/btn">
+          View Details
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </button>
+      </div>
     </div>
-
     }
-  </div>
+    </div>
 </section>

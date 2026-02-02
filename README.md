@@ -1,59 +1,83 @@
-# Hotel
+# 🏨 A&K Grand Hotel - Luxury Reservation Platform
+=====================================
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.5.
+## 🌟 Overview
+A&K Grand Hotel is a premium full-stack reservation system designed to provide a seamless booking experience. The platform features a high-end user interface for guests and a powerful administrative backend for hotel management, bridging the gap between luxury hospitality and modern technology.
 
-## Development server
+## 🚀 Features
 
-To start a local development server, run:
+### For All Guests
+- Luxury Room Showcase: Browse rooms with high-quality imagery and detailed descriptions.
+- Dynamic Hero Interface: Smooth, auto-playing visuals highlighting the hotel’s premium spots.
+- Advanced Filtering: Find the perfect room based on category and availability.
+- Responsive Design: Fully optimized for mobile, tablet, and desktop views.
 
-```bash
-ng serve
-```
+### For Registered Users
+- Secure Authentication: User-specific login and registration flow.
+- Booking Management: Seamlessly book rooms and manage your reservations.
+- Guest Feedback: Leave reviews and star ratings to share your experience.
+- Profile Management: Manage your personal details and booking history.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### For Admins
+- Complete Administrative Dashboard: Manage hotel data, room availability, and guest lists.
+- Review Oversight: Monitor and manage guest testimonials.
+- Site Statistics: Get insights into bookings and hotel performance.
+- Content Management: Update room details, pricing, and hotel information dynamically.
 
-## Code scaffolding
+## 📸 Screenshots
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Home Page
+![Home Page](./public/images/1.png)
+![Home Page](./public/images/2.png)
+![Home Page](./public/images/3.png)
+### Room Selection
+![Rooms Page](./public/images/4.png)
+![Rooms Page](./public/images/5.png)
 
-```bash
-ng generate component component-name
-```
+### Booking Page
+![Booking](./public/images/6.png)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Admin Dashboard
+![Admin Dashboard](./public/images/7.png)
+![Admin Dashboard](./public/images/8.png)
+![Admin Dashboard](./public/images/9.png)
+## 🛠 Technologies Used
 
-```bash
-ng generate --help
-```
+- Frontend: 
+  - Angular 19+ (Standalone Components)
+  - Tailwind CSS (Luxury Custom Theme)
+  - Lucide & Font Awesome Icons
+- Backend: 
+  - .NET Core / Web API
+  - JWT (JSON Web Tokens) for Security
+- Database: 
+  - SQL Server / Entity Framework Core
+  
 
-## Building
+## 💻 Installation and Setup
 
-To build the project run:
+1. Clone the repository:
+      git clone [https://github.com/your-username/ak-grand-hotel.git](https://github.com/your-username/ak-grand-hotel.git)
+   cd ak-grand-hotel
+2. **Frontend Setup (Angular):**
+  ```bash
+   cd frontend
+   npm install
+   ng serve
+  
+3. Backend Setup (.NET):
+  
+  cd backend
+  dotnet restore
+  dotnet run
+  
+## 👥 Project Contributors
+This project is a collaborative effort between:
 
-```bash
-ng build
-```
+Kareem Mohamed - Frontend Architect
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Responsible for UI/UX Design, Angular Component Architecture, and Client-side Logic.
 
-## Running unit tests
+Ahmed Hammad - Backend Strategist
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Responsible for API Design, Database Schema, and Security Implementation.

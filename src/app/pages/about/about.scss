@@ -99,3 +99,31 @@
         }
     }
 }
+.feature-card {
+    @apply p-10 bg-white/5 border border-white/10 rounded-sm transition-all duration-500 text-center;
+}
+
+.feature-card:hover {
+    @apply bg-[#C9A24D] text-[#0B1F33] -translate-y-2 shadow-2xl shadow-[#C9A24D]/20;
+}
+
+.feature-card i {
+    @apply text-4xl mb-8 text-[#C9A24D] transition-colors duration-500;
+}
+
+.feature-card:hover i {
+    @apply text-[#0B1F33];
+}
+
+.feature-card h3 {
+    @apply text-xl font-serif font-bold mb-4;
+}
+
+.feature-card p {
+    @apply text-gray-400 text-sm leading-relaxed transition-colors duration-500;
+}
+
+.feature-card:hover p {
+    @apply text-[#0B1F33]/80;
+}
+
